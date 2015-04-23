@@ -6,10 +6,7 @@ with urllib.request.urlopen('http://www.ischool.berkeley.edu/people/faculty') as
    html = response.read()
 soup = BeautifulSoup(html)
 
-#print(soup.prettify())
-#print(soup.find_all('strong'))
-for link in soup.find_all('a'):
-    if "people/faculty/officehours" in link.get('href'):
-        pass
-    elif "people/faculty/" in link.get('href'):
-       print(link.get('href'))
+faculty = soup.findAll('td', attrs={'class' : 'person-col-1'})
+for td in faculty:
+    print(td.find('a')['href'])
+
