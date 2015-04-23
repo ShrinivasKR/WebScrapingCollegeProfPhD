@@ -8,5 +8,5 @@ soup = BeautifulSoup(html)
 
 faculty = soup.findAll('td', attrs={'class' : 'person-col-1'})
 for td in faculty:
-    print(td.find('a')['href'])
+    print("http://www.ischool.berkeley.edu" + td.find('a')['href'])
 
