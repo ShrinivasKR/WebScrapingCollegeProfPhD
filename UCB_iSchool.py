@@ -14,6 +14,6 @@ for td in faculty:
         html = response.read()
         facultySoup = BeautifulSoup(html)
         education = facultySoup.findAll('div', attrs={'class' : 'field-field-person-education'})
-        for div in education:
-            degree = facultySoup.findAll('p')
-            print(degree)
+        for res in education:
+            print(res.text)
+
