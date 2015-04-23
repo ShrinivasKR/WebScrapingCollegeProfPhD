@@ -13,5 +13,7 @@ for td in faculty:
     with urllib.request.urlopen(facultyURL) as response:
         html = response.read()
         facultySoup = BeautifulSoup(html)
-        print(facultySoup.find(id='education'))
+        education = facultySoup.findAll('div', attrs={'class' : 'field-field-person-education'})
+        for res in education:
+            print(res.text)
 

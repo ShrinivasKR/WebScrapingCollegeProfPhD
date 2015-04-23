@@ -1,6 +1,9 @@
 __author__ = 'Shrinivas'
 
 from bs4 import BeautifulSoup
+import csv
+with open('names.csv', 'w') as csvfile:
+    fieldnames = ['Full Name', 'University', 'Department', 'where they got their PhD']
 import urllib.request
 with urllib.request.urlopen('http://www.ischool.berkeley.edu/people/faculty') as response:
    html = response.read()
@@ -17,3 +20,10 @@ for td in faculty:
         for res in education:
             print(res.text)
 
+
+writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+writer.writeheader()
+writer.writerow({'first_name': 'Baked', 'last_name': 'Beans'})
+writer.writerow({'first_name': 'Lovely', 'last_name': 'Spam'})
+writer.writerow({'first_name': 'Wonderful', 'last_name': 'Spam'})
