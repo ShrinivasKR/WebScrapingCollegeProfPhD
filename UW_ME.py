@@ -8,5 +8,9 @@ soup = BeautifulSoup(html)
 
 #print(soup.prettify())
 #print(soup.find_all('strong'))
-for link in soup.find_all('a'):
-    print(link.get('href'))
+#for link in soup.find_all('a'):
+#    print(link.get('href'))
+
+faculty = soup.findAll('strong')
+for strong in faculty:
+    print("http://www.ischool.berkeley.edu" + strong.find('a')['href'])
