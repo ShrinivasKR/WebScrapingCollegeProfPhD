@@ -13,4 +13,4 @@ soup = BeautifulSoup(html)
 
 faculty = soup.findAll('strong')
 for strong in faculty:
-    print("http://www.ischool.berkeley.edu" + strong.find('a')['href'])
+    print(strong.find('a')['href'])

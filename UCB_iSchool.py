@@ -8,5 +8,12 @@ soup = BeautifulSoup(html)
 
 faculty = soup.findAll('td', attrs={'class' : 'person-col-1'})
 for td in faculty:
-    print("http://www.ischool.berkeley.edu" + td.find('a')['href'])
-
+    facultyURL = ("http://www.ischool.berkeley.edu" + td.find('a')['href'])
+    print(facultyURL)
+    with urllib.request.urlopen(facultyURL) as response:
+        html = response.read()
+        facultySoup = BeautifulSoup(html)
+        education = facultySoup.findAll('div', attrs={'class' : 'field-field-person-education'})
+        for div in education:
+            degree = facultySoup.findAll('p')
+            print(degree)
