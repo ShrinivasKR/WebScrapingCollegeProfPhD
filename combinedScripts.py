@@ -97,3 +97,75 @@ for td in faculty:
             phdSource = facultySoup.findAll(text=re.compile('Ph.D'))
             for i in phdSource:
                 print(i)
+
+with urllib.request.urlopen('http://www.clarkson.edu/business/faculty/index.html') as response:
+    html = response.read()
+soup = BeautifulSoup(html)
+# print(soup.prettify())
+
+#finding all of the individual faculty
+faculty = soup.findAll('tbody')
+for tbody in faculty:
+    #looping through each of the faculty and going to their individual information pages
+    facultyURLs = (tbody.findAll('a'))
+    for a in facultyURLs:
+        name = a.text
+        facultyURL = ("http://www.clarkson.edu/business/faculty/" + a['href'])
+        if "html" in facultyURL:
+            with urllib.request.urlopen(facultyURL) as response:
+                html = response.read()
+                facultySoup = BeautifulSoup(html)
+                #was having trouble with putting it in a csv file, switched to print it instead
+                nameAndUni = facultySoup.title.text;
+                phdSource = facultySoup.findAll(text=re.compile('Ph.D'))
+                for i in phdSource:
+                    print(nameAndUni + ', ' + name + ', ' + 'Business, ' + i)
+
+with urllib.request.urlopen('http://www.clarkson.edu/physics/faculty.html') as response:
+    html = response.read()
+soup = BeautifulSoup(html)
+#print(soup.prettify())
+
+#finding all of the individual faculty
+faculty = soup.findAll('tbody')
+for tbody in faculty:
+    #looping through each of the faculty and going to their individual information pages
+    facultyURLs = (tbody.findAll('a'))
+    for a in facultyURLs:
+        name = a.text
+        facultyURL = ("http://www.clarkson.edu/physics/" + a['href'])
+        if "html" in facultyURL:
+            with urllib.request.urlopen(facultyURL) as response:
+                html = response.read()
+                facultySoup = BeautifulSoup(html)
+                #was having trouble with putting it in a csv file, switched to print it instead
+                nameAndUni = facultySoup.title.text;
+                phdSource = facultySoup.findAll(text=re.compile('Ph.D'))
+                for i in phdSource:
+                    print(nameAndUni + ', ' + name + ', ' + 'Physics, ' + i)
+
+with urllib.request.urlopen('http://www.clarkson.edu/camp/faculty/index.html') as response:
+    html = response.read()
+soup = BeautifulSoup(html)
+#print(soup.prettify())
+
+#finding all of the individual faculty
+faculty = soup.findAll('tbody')
+for tbody in faculty:
+    #looping through each of the faculty and going to their individual information pages
+    facultyURLs = (tbody.findAll('a'))
+    for a in facultyURLs:
+        name = a.text
+        if "http" not in a['href']:
+            facultyURL = ("http://www.clarkson.edu/camp/faculty/" + a['href'])
+        else:
+            facultyURL = a['href']
+        if "html" in facultyURL:
+            with urllib.request.urlopen(facultyURL) as response:
+                html = response.read()
+                facultySoup = BeautifulSoup(html)
+                #was having trouble with putting it in a csv file, switched to print it instead
+                nameAndUni = facultySoup.title.text;
+                phdSource = facultySoup.findAll(text=re.compile('Ph.D'))
+                for i in phdSource:
+                    print(nameAndUni + ', ' + name + ', ' + 'Camp, ' + i)
