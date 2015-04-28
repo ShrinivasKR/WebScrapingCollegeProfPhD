@@ -2,6 +2,7 @@ __author__ = 'Shrinivas'
 
 from bs4 import BeautifulSoup
 import urllib.request
+import re
 
 #initial access to main page
 with urllib.request.urlopen('https://education.uw.edu/people') as response:
@@ -16,7 +17,9 @@ for td in faculty:
         html = response.read()
         facultySoup = BeautifulSoup(html)
         #printing out name and department and college
-        print(facultySoup.title.text)
-        for link in soup.find_all(id="education"):
-            print(facultySoup.p.text)
+        if "Ph.D" in facultySoup.text:
+            print(facultySoup.title.text)
+            phdSource = facultySoup.findAll(text=re.compile('Ph.D'))
+            for i in phdSource:
+                print(i)
 
